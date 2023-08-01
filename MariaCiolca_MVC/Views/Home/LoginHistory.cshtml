@@ -1,0 +1,30 @@
+﻿@model IEnumerable<string>
+
+@{
+    ViewData["Title"] = "Login History";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+@if (Model.Any())
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Login Date and Time</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var login in Model)
+            {
+                <tr>
+                    <td>@login</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No login history available.</p>
+}

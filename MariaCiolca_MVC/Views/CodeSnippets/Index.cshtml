@@ -1,0 +1,72 @@
+﻿@model IEnumerable<MariaCiolca_MVC.Models.CodeSnippetModel>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Code Snippets</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ContentCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.idMember)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Revision)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateTimeAdded)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsPublished)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model) {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ContentCode)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.idMember)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Revision)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateTimeAdded)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsPublished)
+                </td>
+                <td>
+                    @if (User.IsInRole("Admin") || User.IsInRole("User"))
+                        {
+                <a asp-action="Edit" asp-route-id="@item.idCodeSnippet">Edit |</a> 
+                    } 
+                <a asp-action="Details" asp-route-id="@item.idCodeSnippet">Details </a> 
+                    @if (User.IsInRole("Admin") || User.IsInRole("User"))
+                    {
+                <a asp-action="Delete" asp-route-id="@item.idCodeSnippet">| Delete</a>
+                    } 
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

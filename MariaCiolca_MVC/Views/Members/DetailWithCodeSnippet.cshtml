@@ -1,0 +1,44 @@
+﻿
+@model MariaCiolca_MVC.ViewModel.MemberCodeSnippetViewModel
+
+@{
+    ViewData["Title"] = "DetailsWithCodeSnippets";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>DetailsWithCodeSnippets</h1>
+
+<div>
+    <h4>MemberCodeSnippetsViewModel</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Position)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Position)
+        </dd>
+    </dl>
+</div>
+<div>
+ <label asp-for="CodeSnippets" > Code snippets for this member</label> 
+@foreach (var item in Model.CodeSnippets) 
+{
+  <div class = "codeSnippets"> 
+  Titlu<p>@Html.DisplayFor(modelItem => item.Title)</p>
+  Continut <p>@Html.DisplayFor(modelItem => item.ContentCode)</p>
+  Revizie <p>@Html.DisplayFor(modelItem => item.Revision)</p>
+ </div>
+}
+        </div>
+
+<div>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    <a asp-action="Index">Back to List</a>
+</div>

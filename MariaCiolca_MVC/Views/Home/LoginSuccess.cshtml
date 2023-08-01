@@ -1,0 +1,10 @@
+﻿@model IEnumerable<string>
+
+<h1>Login History</h1>
+
+<ul>
+    @foreach (var login in Model)
+    {
+        <li>@login</li>
+    }
+</ul>

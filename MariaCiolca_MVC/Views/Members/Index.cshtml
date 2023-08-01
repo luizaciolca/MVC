@@ -1,0 +1,170 @@
+﻿@using CMariaCiolca_MVC;
+@model PaginatedList<MariaCiolca_MVC.Models.MemberModel>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+
+}
+
+<h1>Members</h1>
+
+
+
+<p>
+    <a asp-action="Create">Create New</a>
+    <form asp-controller="Members" asp-action="Index" method="get">
+        <p>
+            Title: <input type="text" name="searchString" />
+            <input type="submit" value="Filter" />
+        </p>
+    </form>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["NameSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">Name</a>
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["NameSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">Title</a>
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["NameSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">Position</a>
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["NameSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">Description</a>
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["NameSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">Resume</a>
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["NameSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">Username</a>
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["NameSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">Password</a>
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+
+    @*
+    <tbody>
+    @Html.DisplayNameFor(model => model.Name)
+    </th>
+    <th>
+    @Html.DisplayNameFor(model => model.Title)
+    </th>
+    <th>
+    @Html.DisplayNameFor(model => model.Position)
+    </th>
+    <th>
+    @Html.DisplayNameFor(model => model.Description)
+    </th>
+    <th>
+    @Html.DisplayNameFor(model => model.Resume)
+    </th>
+    <th>
+    @Html.DisplayNameFor(model => model.UserName)
+    </th>
+
+    @* <th>
+    @Html.DisplayNameFor(model => model.Password)
+    </th>
+
+    <th>
+    @Html.DisplayNameFor(model => model.Password)
+    </th> *@
+
+    @*     <th></th> *@
+    </th>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Position)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Resume)
+                </td>
+
+                @* <td>
+            @Html.DisplayFor(modelItem => item.UserName)
+            </td> *@
+
+                <td>
+                    @for (int i = 0; i < item.UserNameLength; i++)
+                    {
+                        <span>*</span>
+                    }
+                </td>
+
+                @*  <td>
+            @Html.DisplayFor(modelItem => item.Password)
+            </td> *@
+
+                @*  <td>
+            @Html.DisplayFor(modelItem => item.Password)
+            </td> *@
+                <td>
+                    @for (int i = 0; i < item.PasswordLength; i++)
+                    {
+                        <span>*</span>
+                    }
+                </td>
+
+                <td>
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <a asp-action="Edit" asp-route-id="@item.IdMember">Edit | </a>
+                    }
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <a asp-action="Edit" asp-route-id="@item.IdMember"> Details | </a>
+                    }
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <a asp-action="Edit" asp-route-id="@item.IdMember">Delete | </a>
+                    }
+
+                 @*   <a asp-action="Details" asp-route-id="@item.IdMember">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.IdMember">Delete</a> | *@
+                    <a asp-action="DetailWithCodeSnippet" asp-route-id="@item.IdMember">Details With Code Snippets</a>
+                </td>
+            </tr>
+
+        }
+    </tbody>
+</table>
+
+@{
+    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+}
+
+<a asp-action="Index"
+   asp-route-sortOrder="@ViewData["CurrentSort"]"
+   asp-route-pageNumber="@(Model.PageIndex - 1)"
+   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+   class="btn btn-default @prevDisabled">
+    Previous
+</a>
+<a asp-action="Index"
+   asp-route-sortOrder="@ViewData["CurrentSort"]"
+   asp-route-pageNumber="@(Model.PageIndex + 1)"
+   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+   class="btn btn-default @nextDisabled">
+    Next
+</a> 

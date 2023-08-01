@@ -1,0 +1,106 @@
+﻿
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - MariaCiolca_MVC</title>
+    <link rel="stylesheet" href="~/css/bootswatchTheme.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/MariaCiolca_MVC.styles.css" asp-append-version="true" />
+
+ 
+    <!-- Add custom CSS styles -->
+    <style>
+        .custom-btn {
+            font-family: Arial, Helvetica, sans-serif;
+            color: #fff;
+        }
+        .custom-btn-register,
+        .custom-btn-login {
+            font-family: Arial, Helvetica, sans-serif;
+            color: #fff;
+        }
+
+        /* Set font color for all other items to white */
+        .navbar-nav .nav-link {
+            color: #fff;
+        }
+    </style>
+</head>
+
+<nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
+    <div class="container-fluid">
+        <!-- Replace the navbar brand with the "Acasa" button -->
+        <button class="navbar-brand btn btn-primary" onclick="goToHomePage()">Home</button> 
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarColor01">
+            <ul class="navbar-nav me-auto">
+                <!-- Replace the navbar links with your desired links (e.g., Announcements, CodeSnippets, etc.) -->
+                <li class="nav-item">
+                    <a class="nav-link custom-btn-register" asp-area="" asp-controller="Announcements" asp-action="Index"> Announcements </a>
+                </li>
+                @if (User.IsInRole("Admin") || User.IsInRole("User") || User.IsInRole("UserLuiza"))
+                {
+                <li class="nav-item">
+                    <a class="nav-link custom-btn-register" asp-area="" asp-controller="Members" sp-action="Index"> Members </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link custom-btn-register" asp-area="" asp-controller="CodeSnippets" sp-action="Index"> Code Snippets </a>
+                </li>
+                }
+
+                @* <li class="nav-item">
+                <a class="nav-link custom-btn-register" asp-area="" asp-controller="Members" sp-action="Index">Members</a> *@
+                </li>
+               @* <li class="nav-item">
+                    <a class="nav-link custom-btn-register" asp-area="" asp-controller="CodeSnippets" sp-action="Index">CodeSnippets</a> *@
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link custom-btn-register" asp-area="" asp-controller="MembershipTypes" asp-action="Index"> Membership Types </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link custom-btn-register" asp-area="" asp-controller="Memberships" asp-action="Index"> Memberships </a>
+                </li>
+               
+                    <!-- Add dropdown items if necessary -->
+                </li>
+            </ul>
+            <partial name="_LoginPartial" />
+         
+        </div>
+    </div>
+</nav>
+
+<header>
+    <!-- ... (rest of the header content) ... -->
+</header>
+<div class="container">
+    <main role="main" class="pb-3">
+        @RenderBody()
+    </main>
+</div>
+
+<footer class="border-top footer text-muted">
+    <!-- ... (rest of the footer content) ... -->
+</footer>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
+
+<!-- Custom JavaScript code to handle the "Acasa" button click event -->
+<script>
+    function goToHomePage() {
+        // Replace "home-url" with the URL of your main page
+        window.location.href = "https://localhost:7051/";
+    }
+</script>
+
+
+@await RenderSectionAsync("Scripts", required: false)
+@await Component.InvokeAsync("NToastNotify")
+</html>
+

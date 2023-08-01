@@ -1,0 +1,86 @@
+﻿@model IEnumerable<MariaCiolca_MVC.Models.AnnoucementModel>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Annoucements</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+
+<div class="col-4 p-0 justify-content-end"> 
+    <form asp-controller="Member" asp-controller ="Index"> 
+        <span class="btn-group"
+        <input class=" form-control" type ="text" name="SearchText" 
+                placeholder="Search Key" >
+       < input class = "p-1 ml-2 btn btn-sm btn-info" type ="submit" value="Search" />
+        </span>
+        </form>
+        </div>
+
+  <br />
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ValidFrom)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ValidTo)
+            </th>
+            <th>
+               @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Text)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EventDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Tags)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ValidFrom)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ValidTo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Text)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EventDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tags)
+            </td>
+            <td>
+                    @if (User.IsInRole("Admin")) {
+                        <a asp-action="Edit" asp-route-id="@item.IdAnnouncement">Edit | </a> 
+                     } 
+                    <a asp-action="Details" asp-route-id="@item.IdAnnouncement">Details</a> 
+
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <a asp-action="Delete" asp-route-id="@item.IdAnnouncement"> | Delete</a>
+                    }
+                </td>
+        </tr>
+}
+    </tbody>
+</table>
+

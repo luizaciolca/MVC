@@ -1,0 +1,44 @@
+﻿html {
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    margin-bottom: 60px;
+}
+
+customHead {
+    background-color: #DED3FE;
+    color: white;
+}
+
+h4 {
+    backdrop-culor: red;
+    border: lpx solid red;
+    font-family: 'Arial, Helvetica, sans-serif';
+    body
+
+{
+    font-family: Arial, sans-serif;
+}
+
+body {
+    font-family: Arial, sans-serif;
+}
+
+
+
+
+
+
